@@ -8,6 +8,11 @@ const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
 const data = {menu: 0};
 console.log("debug flag 0");
+const LoadFunction = function() {
+    cv().width = wx() - 16;
+    cv().height = wy() - 16;
+    TitleScreen();
+}
 const TitleScreen = function() {
     cx().reset();
     cx().font = "30px monospace";
@@ -23,4 +28,4 @@ const TitleScreen = function() {
     cx().fillText("Quit Game", 40, 360);
     console.log("debug flag 2");
 }
-window.addEventListener("load",TitleScreen,{passive: true});
+window.addEventListener("load",LoadFunction,{passive: true});
