@@ -137,7 +137,7 @@ const GameUpdateTick = function(dt) {
     data.lastUpdate = Date.now();
     PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt);
     let removable = [];
-    let Ecoef = data.options.difficulty + ((data.lastUpdate - data.startTime)/60000);
+    let Ecoef = data.options.difficulty + ((data.lastUpdate - data.startTime)/360000);
     if(Date.now() - data.lastSpawnTry > (1700 / Ecoef)){
         data.lastSpawnTry = Date.now();
         
