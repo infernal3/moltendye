@@ -137,14 +137,16 @@ const GameUpdateTick = function(dt) {
     data.lastUpdate = Date.now();
     PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt);
     let removable = [];
-    if(Date.now() - data.lastSpawnTry > (1700 / data.options.difficulty)){
+    let Ecoef = data.options.difficulty + ((data.lastUpdate - data.startTime)/60000);
+    if(Date.now() - data.lastSpawnTry > (1700 / Ecoef)){
         data.lastSpawnTry = Date.now();
+        
         let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
-        if(data.options.difficulty > 1.4){
+        if(Ecoef > 1.4){
             array.push("medium1", "medium2");
-        } if(data.options.difficulty > 1.7){
+        } if(Ecoef > 1.7){
             array.push("medium3", "medium4");
-        } if(data.options.difficulty > 2){
+        } if(Ecoef > 2){
             S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 50 5.49778714378 5 2`,
                            `${data.player.x-120} ${data.player.y+120} 50 0.7853981633974483 5 2`,
                            `${data.player.x+120} ${data.player.y+120} 50 2.356194490192345 5 2`,
@@ -155,7 +157,7 @@ const GameUpdateTick = function(dt) {
         SpawnFunction(S_DATA[array[parseInt(Math.random() * array.length)]]);
     }
     for(let i=0;i<data.bullets.length;i++){
-        SPEED_MODIFIER = data.options.difficulty * dt/1000;
+        SPEED_MODIFIER = Ecoef * dt/1000;
         data.bullets[i].x += (data.bullets[i].xv * SPEED_MODIFIER);
         data.bullets[i].y += (data.bullets[i].yv * SPEED_MODIFIER);
         let dcoef = Math.sqrt(Math.pow(data.player.x - data.bullets[i].x, 2) + Math.pow(data.player.y - data.bullets[i].y, 2));
