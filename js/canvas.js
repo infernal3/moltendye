@@ -76,6 +76,7 @@ const KeyDownHandler = function(E) {
 const TitleScreen = function() {
     clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
+    cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().font = "30px monospace";
     cx().fillText("Quit Game", 40, 360);
@@ -94,6 +95,7 @@ const TitleScreen = function() {
 const Options = function() {
     clickables = [];
     cx().reset();
+    cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     data.menu = 2;
     cx().font = "35px monospace";
@@ -132,6 +134,7 @@ const Options = function() {
 const StartGame = function() {
     clickables = [];
     cx().reset();
+    cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     data.menu = -1;
     data.player = {x: 320, y: 320};
@@ -193,6 +196,7 @@ const GameOver = function() {
     data.menu = 4;
     window.setTimeout(()=>{
         cx().reset();
+        cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         let img = new Image();
         img.src = "https://infernal3.github.io/moltendye/image/game_over.png";
@@ -261,6 +265,7 @@ const SpawnFunction = function(arr) {
 }
 const GameDrawTick = function() {
     cx().reset();
+    cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().rect(2, 2, 620, 620);
     cx().stroke();
