@@ -95,10 +95,11 @@ const StartGame = function() {
     cx().reset();
     data.menu = -1;
     data.player = {x: 320, y: 320};
+    data.playerHealth = 3;
     data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
     data.lastUpdate = data.lastSpawnTry = data.startTime = Date.now();
-    window.setInterval(GameTick, 25);
+    data.bufferID = window.setInterval(GameTick, 25);
 }
 const GameTick = function() {
     GameUpdateTick(Date.now() - data.lastUpdate);
@@ -106,9 +107,9 @@ const GameTick = function() {
 }
 const GameUpdateTick = function(dt) {
     data.lastUpdate = Date.now();
-    PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt)
+    PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt);
     let removable = [];
-    if(Date.now() - data.lastSpawnTry > 1400){
+    if(Date.now() - data.lastSpawnTry > 1700){
         data.lastSpawnTry = Date.now();
         index = ["wave1", "wave2", "spr11", "spr21", "spr31", "spr41"][parseInt(Math.random() * 6)];
         SpawnFunction(S_DATA[index]);
@@ -116,7 +117,18 @@ const GameUpdateTick = function(dt) {
     for(let i=0;i<data.bullets.length;i++){
         data.bullets[i].x += (data.bullets[i].xv * dt/1000);
         data.bullets[i].y += (data.bullets[i].yv * dt/1000);
-        // Collision check here
+        let dcoef = Math.sqrt(Math.pow(data.player.x - data.bullets[i].x, 2) + Math.pow(data.player.y - data.bullets[i].y, 2));
+        if(dcoef <= 16 + data.bullets[i].r] {
+            // A collision occurred!
+            data.bullets[i].removeFlag = true;
+            console.log("player took damage from bullet: "+JSON.stringify(data.bullets[i]));
+            data.playerHealth--;
+            if(data.playerHealth <= 0){
+                console.log("debug flag GAME OVER");
+                window.clearInterval(data.bufferID);
+                data.menu = 4;
+            }
+        }
         data.bullets[i].l -= dt/1000;
         if(data.bullets[i].l < 0) data.bullets[i].removeFlag = true;
     }
