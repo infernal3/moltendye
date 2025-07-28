@@ -99,7 +99,7 @@ const Options = function() {
     
     cx().font = "16px monospace";
     cx().fillText("[WORK IN PROGRESS]", 20, 200);
-    cx().fillText(`Difficulty coefficient: ${data.options.difficulty}`, 20, 240);
+    cx().fillText(`Difficulty coefficient: ${data.options.difficulty.toFixed(3)}`, 20, 240);
     cx().strokeRect(25, 280, 200, 30);
     cx().strokeRect(300, 280, 200, 30);
     cx().fillText("Increase Difficulty", 25, 300);
@@ -135,7 +135,7 @@ const GameUpdateTick = function(dt) {
     data.lastUpdate = Date.now();
     PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt);
     let removable = [];
-    if(Date.now() - data.lastSpawnTry > 1700){
+    if(Date.now() - data.lastSpawnTry > (1700 / data.options.difficulty)){
         data.lastSpawnTry = Date.now();
         index = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"][parseInt(Math.random() * 10)];
         SpawnFunction(S_DATA[index]);
