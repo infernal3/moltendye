@@ -171,11 +171,12 @@ const GameDrawTick = function() {
     cx().beginPath();
     cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
     cx().stroke();
-    cx().beginPath();
+    
     for(let i of data.bullets){
+        cx().beginPath();
         cx().arc(i.x, i.y, i.r, 0, 2 * Math.PI, false);
+        cx().stroke();
     }
-    cx().stroke();
 }
 window.addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
