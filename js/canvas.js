@@ -90,6 +90,19 @@ const TitleScreen = function() {
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
 }
+const Options = function() {
+    clickables = [];
+    cx().reset();
+    data.menu = 2;
+    cx().font = "35px monospace";
+    cx().fillText("Options Menu", 180, 60);
+    
+    cx().font = "16px monospace";
+    cx().fillText("Sorry, we don't have anything here yet", 20, 200);
+    cx().font = "30px monospace";
+    cx().fillText(`Return to menu`, 100, 460);
+    clickables.push({x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen});
+}
 const StartGame = function() {
     clickables = [];
     cx().reset();
