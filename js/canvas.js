@@ -133,9 +133,11 @@ const GameUpdateTick = function(dt) {
 const GameOver = function() {
     window.clearInterval(data.bufferID);
     data.menu = 4;
-    cx().reset();
-    cx().font = "60px monospace";
-    cx().fillText("GAME OVER", 40, 320);
+    window.setTimeout(()=>{
+        cx().reset();
+        cx().font = "60px monospace";
+        cx().fillText("GAME OVER", 200, 300);
+    }, 500);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
     switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
