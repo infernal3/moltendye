@@ -144,8 +144,8 @@ const GameUpdateTick = function(dt) {
     data.player.y = Math.max(16, Math.min(604, data.player.y));
     let removable = [];
     for(let i=0;i<data.bullets.length;i++){
-        data.bullets[i].x += data.bullets[i].vx;
-        data.bullets[i].y += data.bullets[i].vy;
+        data.bullets[i].x += data.bullets[i].vx * dt/1000;
+        data.bullets[i].y += data.bullets[i].vy * dt/1000;
         // Collision check here
         data.bullets[i].l -= dt/1000;
         if(data.bullets[i].l < 0) removable += data.bullets[i];
