@@ -33,10 +33,69 @@ const TitleScreen = function() {
         cx().fillText(`Required: (640, 640) or more`, 0, 120);
         return;
     }
-    clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: ()=>{console.log("Start Game")} });
+    clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: StartGame});
     clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: ()=>{console.log("Options")} });
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
+}
+const StartGame = function() {
+    clickables = [];
+    cx.reset();
+    data.menu = -1;
+    data.player = {x: 320, y: 320};
+    data.controls = {left: false, up: false, down: false, right: false};
+    data.lastUpdate = Date.now();
+    window.setInterval(GameTick, 25);
+}
+const GameTick = function() {
+    GameUpdateTick(Date.now() - data.lastUpdate());
+    GameDrawTick();
+}
+const GameUpdateTick = function(dt) {
+    var DIAGONAL = 0.028284271247461905 * dt, STRAIGHT = 0.04 * dt;
+    data.lastUpdate = Date.now();
+    switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
+        case 12:
+            data.player.x -= DIAGONAL;
+            data.player.y -= DIAGONAL;
+            break;
+        case 5:
+            data.player.x += DIAGONAL;
+            data.player.y -= DIAGONAL;
+            break;
+        case 10:
+            data.player.x -= DIAGONAL;
+            data.player.y += DIAGONAL;
+            break;
+        case 3:
+            data.player.x += DIAGONAL;
+            data.player.y += DIAGONAL;
+            break;
+        case 8:
+        case 14:
+            data.player.x -= STRAIGHT;
+            break;
+        case 4:
+        case 13:
+            data.player.y -= STRAIGHT;
+            break;
+        case 2:
+        case 11:
+            data.player.y += STRAIGHT;
+            break;
+        case 1:
+        case 7:
+            data.player.x += STRAIGHT;
+            break;
+    }
+}
+const GameDrawTick = function() {
+    ctx.reset();
+    ctx.rect(2, 2, 620, 620);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.circle(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
+    ctx.stroke();
 }
 cv().addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
