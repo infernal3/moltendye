@@ -136,8 +136,10 @@ const GameOver = function() {
     window.setTimeout(()=>{
         cx().reset();
         let img = new Image();
-        img.src = "./image/game_over.png"
-        cx().drawImage(img, 50, 0, 540, 324)
+        img.src = "./image/game_over.png";
+        img.width = "40px";
+        img.height = "24px";
+        cx().drawImage(img, 50, 25, 540, 324)
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
     }, 500);
