@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0};
+const data = {menu: 0, options: {difficulty: 1}};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -135,8 +135,9 @@ const GameOver = function() {
     data.menu = 4;
     window.setTimeout(()=>{
         cx().reset();
-        cx().font = "60px monospace";
-        cx().fillText("GAME OVER", 200, 300);
+        let img = new Image();
+        img.src = "./image/game_over.png"
+        cx().drawImage(img, 50, 0, 540, 324)
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
     }, 500);
