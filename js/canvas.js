@@ -121,7 +121,7 @@ const Options = function() {
     cx().strokeRect(25, 390, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 390, y2: 420, handler: () => {
         data.options.color = 1 - data.options.color;
-        body.background = data.options.color == 1 ? "#fdfdfd" : "#000000";
+        document.body.background = data.options.color == 1 ? "#fdfdfd" : "#000000";
         cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         Options();
     } });
