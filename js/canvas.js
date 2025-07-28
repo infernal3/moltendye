@@ -139,6 +139,8 @@ const GameUpdateTick = function(dt) {
             data.player.x += STRAIGHT;
             break;
     }
+    data.player.x = Math.max(16, Math.min(604, data.player.x));
+    data.player.y = Math.max(16, Math.min(604, data.player.y));
 }
 const GameDrawTick = function() {
     cx().reset();
