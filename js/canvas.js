@@ -137,6 +137,8 @@ const GameOver = function() {
         cx().reset();
         cx().font = "60px monospace";
         cx().fillText("GAME OVER", 200, 300);
+        cx().font = "20px monospace";
+        cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
     }, 500);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
