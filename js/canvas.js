@@ -104,11 +104,11 @@ const Options = function() {
     cx().strokeRect(300, 280, 200, 30);
     cx().fillText("Increase Difficulty", 25, 300);
     clickables.push({x1: 25, x2: 225, y1: 280, y2: 310, handler: () => {
-        options.player.difficulty *= 1.1;
+        data.options.difficulty *= 1.1;
         Options();
     } });
     clickables.push({x1: 300, x2: 500, y1: 280, y2: 310, handler: () => {
-        options.player.difficulty /= 1.1;
+        data.options.difficulty /= 1.1;
         Options();
     } });
     cx().fillText("Decrease Difficulty", 300, 300);
