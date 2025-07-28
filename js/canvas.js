@@ -123,16 +123,19 @@ const GameUpdateTick = function(dt) {
             data.bullets[i].removeFlag = true;
             console.log("player took damage from bullet: "+JSON.stringify(data.bullets[i]));
             data.playerHealth--;
-            if(data.playerHealth <= 0){
-                console.log("debug flag GAME OVER");
-                window.clearInterval(data.bufferID);
-                data.menu = 4;
-            }
+            if(data.playerHealth <= 0) GameOver();
         }
         data.bullets[i].l -= dt/1000;
         if(data.bullets[i].l < 0) data.bullets[i].removeFlag = true;
     }
     data.bullets = data.bullets.filter(RemovableFilters);
+}
+const GameOver = function() {
+    window.clearInterval(data.bufferID);
+    data.menu = 4;
+    cx().reset();
+    cx().font = "60px monospace";
+    cx().fillText("GAME OVER", 40, 320);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
     switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
