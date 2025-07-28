@@ -143,12 +143,30 @@ const GameUpdateTick = function(dt) {
     data.player.x = Math.max(16, Math.min(604, data.player.x));
     data.player.y = Math.max(16, Math.min(604, data.player.y));
 }
+const SpawnFunction = function(id) {
+    for(let i of (S_DATA.id || [])){
+        let strs = i.split(" ");
+        data.bullets.push({
+            x: parseFloat(strs[0]),
+            y: parseFloat(strs[1]),
+            xv: parseFloat(strs[2]) * Math.cos(strs[3]),
+            yv: parseFloat(strs[2]) * Math.sin(strs[3]),
+            r: parseFloat(strs[4]),
+            l: parseFloat(strs[5]),
+        });
+    }
+}
 const GameDrawTick = function() {
     cx().reset();
     cx().rect(2, 2, 620, 620);
     cx().stroke();
     cx().beginPath();
     cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
+    cx().stroke();
+    cx().beginPath();
+    for(let i of data.bullets){
+        cx().arc(i.x, i.y, i.r, 0, 2 * Math.PI, false);
+    }
     cx().stroke();
 }
 window.addEventListener("contextMenu",PreventDefault,{passive: false});
