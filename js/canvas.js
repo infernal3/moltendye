@@ -143,7 +143,7 @@ const GameUpdateTick = function(dt) {
         SpawnFunction(S_DATA[index]);
     }
     for(let i=0;i<data.bullets.length;i++){
-        SPEED_MODIFIER = Math.sqrt(data.options.difficulty) * dt/1000;
+        SPEED_MODIFIER = data.options.difficulty * dt/1000;
         data.bullets[i].x += (data.bullets[i].xv * SPEED_MODIFIER);
         data.bullets[i].y += (data.bullets[i].yv * SPEED_MODIFIER);
         let dcoef = Math.sqrt(Math.pow(data.player.x - data.bullets[i].x, 2) + Math.pow(data.player.y - data.bullets[i].y, 2));
