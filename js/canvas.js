@@ -143,9 +143,10 @@ const GameUpdateTick = function(dt) {
     data.player.x = Math.max(16, Math.min(604, data.player.x));
     data.player.y = Math.max(16, Math.min(604, data.player.y));
 }
-const SpawnFunction = function(id) {
-    for(let i of (S_DATA.id || [])){
+const SpawnFunction = function(arr) {
+    for(let i of arr){
         let strs = i.split(" ");
+        console.log("debug flag 0 ~"+strs);
         data.bullets.push({
             x: parseFloat(strs[0]),
             y: parseFloat(strs[1]),
