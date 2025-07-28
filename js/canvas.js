@@ -14,6 +14,7 @@ const LoadFunction = function() {
     cv().height = wy() - 16;
     TitleScreen();
 }
+const RemovableFilters = function(E) { return E.removable; }
 const PreventDefault = function(E) { E.preventDefault(); }
 const ClickHandler = function(E) {
     for (var i of clickables){
@@ -148,8 +149,9 @@ const GameUpdateTick = function(dt) {
         data.bullets[i].y += (data.bullets[i].yv * dt/1000);
         // Collision check here
         data.bullets[i].l -= dt/1000;
-        if(data.bullets[i].l < 0) removable += data.bullets[i];
+        if(data.bullets[i].l < 0) data.bullets[i].removeFlag = true;
     }
+    data.bullets = data.bullets.filter(RemovableFilters);
 }
 const SpawnFunction = function(arr) {
     for(let i of arr){
@@ -161,6 +163,7 @@ const SpawnFunction = function(arr) {
             yv: parseFloat(strs[2]) * -1 * Math.sin(strs[3]),
             r: parseFloat(strs[4]),
             l: parseFloat(strs[5]),
+            removeFlag: false
         });
     }
 }
