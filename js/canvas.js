@@ -100,11 +100,13 @@ const Options = function() {
     cx().font = "16px monospace";
     cx().fillText("[WORK IN PROGRESS]", 20, 200);
     cx().fillText(`Player difficulty: ${data.options.difficulty}`, 20, 240);
-    cx().strokeRect(25, 280, 200, 20);
-    cx().strokeRect(300, 280, 200, 20);
+    cx().strokeRect(25, 280, 200, 30);
+    cx().strokeRect(300, 280, 200, 30);
+    cx().fillText("debug flag 1", 25, 280);
+    cx().fillText("debug flag 2", 300, 280);
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 520);
-    clickables.push({x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen});
+    clickables.push({x1: 20, x2: 520, y1: 500, y2: 540, handler: TitleScreen});
 }
 const StartGame = function() {
     clickables = [];
