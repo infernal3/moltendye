@@ -40,7 +40,7 @@ const TitleScreen = function() {
 }
 const StartGame = function() {
     clickables = [];
-    cx.reset();
+    cx().reset();
     data.menu = -1;
     data.player = {x: 320, y: 320};
     data.controls = {left: false, up: false, down: false, right: false};
@@ -90,12 +90,12 @@ const GameUpdateTick = function(dt) {
     }
 }
 const GameDrawTick = function() {
-    ctx.reset();
-    ctx.rect(2, 2, 620, 620);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.circle(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
-    ctx.stroke();
+    cx().reset();
+    cx().rect(2, 2, 620, 620);
+    cx().stroke();
+    cx().beginPath();
+    cx().circle(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
+    cx().stroke();
 }
 cv().addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
