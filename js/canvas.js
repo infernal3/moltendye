@@ -142,11 +142,18 @@ const GameUpdateTick = function(dt) {
     }
     data.player.x = Math.max(16, Math.min(604, data.player.x));
     data.player.y = Math.max(16, Math.min(604, data.player.y));
+    let removable = [];
+    for(let i=0;i<data.bullets.length;i++){
+        data.bullets[i].x += data.bullets[i].vx;
+        data.bullets[i].y += data.bullets[i].vy;
+        // Collision check here
+        data.bullets[i].l -= dt/1000;
+        if(data.bullets[i].l < 0) removable += data.bullets[i];
+    }
 }
 const SpawnFunction = function(arr) {
     for(let i of arr){
         let strs = i.split(" ");
-        console.log("debug flag 0 ~"+strs);
         data.bullets.push({
             x: parseFloat(strs[0]),
             y: parseFloat(strs[1]),
