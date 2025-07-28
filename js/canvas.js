@@ -48,7 +48,7 @@ const StartGame = function() {
     window.setInterval(GameTick, 25);
 }
 const GameTick = function() {
-    GameUpdateTick(Date.now() - data.lastUpdate());
+    GameUpdateTick(Date.now() - data.lastUpdate);
     GameDrawTick();
 }
 const GameUpdateTick = function(dt) {
