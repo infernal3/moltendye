@@ -1,12 +1,12 @@
 /**
- * Original script by infernal3 - Moltendye
+ * Original script by infernal3
  */
 const el = e => document.getElementById(e);
 const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1}};
+const data = {menu: 0, options: {difficulty: 1, color: 1}};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -76,6 +76,7 @@ const KeyDownHandler = function(E) {
 const TitleScreen = function() {
     clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
+    cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().font = "30px monospace";
     cx().fillText("Quit Game", 40, 360);
     if(wx() < 640 || wy() < 640) {
@@ -93,6 +94,7 @@ const TitleScreen = function() {
 const Options = function() {
     clickables = [];
     cx().reset();
+    cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     data.menu = 2;
     cx().font = "35px monospace";
     cx().fillText("Options Menu", 180, 60);
@@ -102,7 +104,7 @@ const Options = function() {
     cx().fillText(`Difficulty coefficient: ${data.options.difficulty.toFixed(3)}`, 20, 240);
     cx().strokeRect(25, 280, 200, 30);
     cx().strokeRect(300, 280, 200, 30);
-    cx().fillText("Increase Difficulty", 25, 300);
+    cx().fillText("Increase Difficulty", 30, 300);
     clickables.push({x1: 25, x2: 225, y1: 280, y2: 310, handler: () => {
         data.options.difficulty *= 1.1;
         if(data.options.difficulty > 10) data.options.difficulty = 10.834705943388395;
@@ -113,7 +115,16 @@ const Options = function() {
         if(data.options.difficulty < 0.7) data.options.difficulty = 0.6830134553650705;
         Options();
     } });
-    cx().fillText("Decrease Difficulty", 300, 300);
+    cx().fillText("Decrease Difficulty", 305, 300);
+    cx().fillText(`Color scheme: ${data.options.color == 1 ? "Light":"Dark"}`, 20, 350);
+    cx().fillText("Change color scheme", 30, 410);
+    cx().strokeRect(25, 390, 200, 30);
+    clickables.push({x1: 25, x2: 225, y1: 390, y2: 420, handler: () => {
+        data.options.color = 1 - data.options.color;
+        body.background = data.options.color == 1 ? "#fdfdfd" : "#000000";
+        cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
+        Options();
+    } });
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 520);
     clickables.push({x1: 20, x2: 520, y1: 500, y2: 540, handler: TitleScreen});
@@ -121,6 +132,7 @@ const Options = function() {
 const StartGame = function() {
     clickables = [];
     cx().reset();
+    cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     data.menu = -1;
     data.player = {x: 320, y: 320};
     data.playerHealth = 3;
@@ -181,6 +193,7 @@ const GameOver = function() {
     data.menu = 4;
     window.setTimeout(()=>{
         cx().reset();
+        cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         let img = new Image();
         img.src = "https://infernal3.github.io/moltendye/image/game_over.png";
         img.width = "40px";
@@ -247,6 +260,7 @@ const SpawnFunction = function(arr) {
 }
 const GameDrawTick = function() {
     cx().reset();
+    cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().rect(2, 2, 620, 620);
     cx().stroke();
     cx().beginPath();
