@@ -145,9 +145,12 @@ const GameUpdateTick = function(dt) {
         } if(difficulty > 1.7){
             array.push("medium3", "medium4");
         } if(difficulty > 2){
-            array.push("hard1", "hard2");
-        } if(difficulty > 2.6){
-            array.push("harder1");
+            S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 40 5.49778714378 5 1`,
+                           `${data.player.x-120} ${data.player.y+120} 40 0.7853981633974483 5 1`,
+                           `${data.player.x+120} ${data.player.y+120} 40 2.356194490192345 5 1`,
+                           `${data.player.x+120} ${data.player.y-120} 40 3.9269908169872414 5 1`
+                          ];
+            array.push("hard");
         }
         SpawnFunction(S_DATA[array[parseInt(Math.random() * array.length)]]);
     }
