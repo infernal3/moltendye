@@ -158,7 +158,7 @@ const SpawnFunction = function(arr) {
             x: parseFloat(strs[0]),
             y: parseFloat(strs[1]),
             xv: parseFloat(strs[2]) * Math.cos(strs[3]),
-            yv: parseFloat(strs[2]) * Math.sin(strs[3]),
+            yv: parseFloat(strs[2]) * -1 * Math.sin(strs[3]),
             r: parseFloat(strs[4]),
             l: parseFloat(strs[5]),
         });
