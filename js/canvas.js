@@ -105,10 +105,12 @@ const Options = function() {
     cx().fillText("Increase Difficulty", 25, 300);
     clickables.push({x1: 25, x2: 225, y1: 280, y2: 310, handler: () => {
         data.options.difficulty *= 1.1;
+        if(data.options.difficulty > 10) data.options.difficulty = 10.834705943388395;
         Options();
     } });
     clickables.push({x1: 300, x2: 500, y1: 280, y2: 310, handler: () => {
         data.options.difficulty /= 1.1;
+        if(data.options.difficulty < 0.7) data.options.difficulty = 0.6830134553650705;
         Options();
     } });
     cx().fillText("Decrease Difficulty", 300, 300);
@@ -141,8 +143,9 @@ const GameUpdateTick = function(dt) {
         SpawnFunction(S_DATA[index]);
     }
     for(let i=0;i<data.bullets.length;i++){
-        data.bullets[i].x += (data.bullets[i].xv * dt/1000);
-        data.bullets[i].y += (data.bullets[i].yv * dt/1000);
+        SPEED_MODIFIER = Math.sqrt(data.options.difficulty) * dt/1000;
+        data.bullets[i].x += (data.bullets[i].xv * SPEED_MODIFIER);
+        data.bullets[i].y += (data.bullets[i].yv * SPEED_MODIFIER);
         let dcoef = Math.sqrt(Math.pow(data.player.x - data.bullets[i].x, 2) + Math.pow(data.player.y - data.bullets[i].y, 2));
         if(dcoef <= 16 + data.bullets[i].r) {
             // A collision occurred!
