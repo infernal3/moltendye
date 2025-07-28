@@ -18,9 +18,9 @@ const TitleScreen = function() {
     cx().font = "30px monospace";
     console.log("debug flag 1");
     if(wx() < 640 || wy() < 640) {
-        cx().fillText("Your screen is too small to play this!", 0, 0);
-        cx().fillText(`Current dims: (${wx()}, ${wy()})`, 0, 40);
-        cx().fillText(`Required: (640, 640) or more`, 0, 40);
+        cx().fillText("Your screen is too small to play!", 0, 40);
+        cx().fillText(`Current dims: (${wx()}, ${wy()})`, 0, 80);
+        cx().fillText(`Required: (640, 640) or more`, 0, 120);
         return;
     }
     cx().fillText("Start Game", 40, 240);
