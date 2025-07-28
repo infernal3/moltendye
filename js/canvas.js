@@ -47,7 +47,7 @@ const KeyUpHandler = function(E) {
             break;
     }
 }
-const KeyUpHandler = function(E) {
+const KeyDownHandler = function(E) {
     if(data.menu >= 0) return;
     switch(E.key){
         case "a":
