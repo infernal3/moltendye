@@ -14,6 +14,7 @@ const LoadFunction = function() {
     cv().height = wy() - 16;
     TitleScreen();
 }
+const PreventDefault = function(E) { E.preventDefault(); }
 const ClickHandler = function(E) {
     for (var i of clickables){
         if((typeof i)==='object'){
@@ -37,4 +38,6 @@ const TitleScreen = function() {
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
 }
+cv().addEventListener("contextMenu",PreventDefault,{passive: false});
+cv().addEventListener("mouseup",ClickHandler,{passive: true});
 window.addEventListener("load",LoadFunction,{passive: true});
