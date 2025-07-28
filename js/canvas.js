@@ -23,7 +23,7 @@ const ClickHandler = function(E) {
     }
 }
 const TitleScreen = function() {
-    clickables = [{x1: 40, y1: 360, x2: 340, y2: 390, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
+    clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
     cx().font = "30px monospace";
     cx().fillText("Quit Game", 40, 360);
@@ -33,8 +33,8 @@ const TitleScreen = function() {
         cx().fillText(`Required: (640, 640) or more`, 0, 120);
         return;
     }
-    clickables.push({x1: 40, y1: 240, x2: 340, y2: 270, handler: ()=>{console.log("Start Game")} });
-    clickables.push({x1: 40, y1: 300, x2: 340, y2: 330, handler: ()=>{console.log("Options")} });
+    clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: ()=>{console.log("Start Game")} });
+    clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: ()=>{console.log("Options")} });
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
 }
