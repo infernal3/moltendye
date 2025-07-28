@@ -7,16 +7,26 @@ const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
 const data = {menu: 0};
-console.log("debug flag 0");
+const clickables = [];
+
 const LoadFunction = function() {
     cv().width = wx() - 16;
     cv().height = wy() - 16;
     TitleScreen();
 }
+const ClickHandler = function(E) {
+    for (var i of clickables){
+        if((typeof i)==='object'){
+            if(i.x1 <= E.offsetX && i.x2 >= E.offsetX && i.y1 <= E.offsetY && i.y2 >= E.offsetY) i.handler();
+        }
+    }
+}
 const TitleScreen = function() {
+    clickables.push({x1: 40, y1: 240, x2: 340, y2: 270, handler: ()=>{console.log("Start Game")} });
+    clickables.push({x1: 40, y1: 300, x2: 340, y2: 330, handler: ()=>{console.log("Options")} });
+    clickables.push({x1: 40, y1: 360, x2: 340, y2: 390, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} });
     cx().reset();
     cx().font = "30px monospace";
-    console.log("debug flag 1");
     if(wx() < 640 || wy() < 640) {
         cx().fillText("Your screen is too small to play!", 0, 40);
         cx().fillText(`Current dims: (${wx()}, ${wy()})`, 0, 80);
@@ -26,6 +36,5 @@ const TitleScreen = function() {
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
     cx().fillText("Quit Game", 40, 360);
-    console.log("debug flag 2");
 }
 window.addEventListener("load",LoadFunction,{passive: true});
