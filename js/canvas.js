@@ -136,7 +136,7 @@ const GameOver = function() {
     window.setTimeout(()=>{
         cx().reset();
         let img = new Image();
-        img.src = "./image/game_over.png";
+        img.src = "https://infernal3.github.io/moltendye/image/game_over.png";
         img.width = "40px";
         img.height = "24px";
         img.addEventListener("load",()=>{cx().drawImage(this, 50, 25, 540, 324);})
