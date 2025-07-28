@@ -97,7 +97,7 @@ const StartGame = function() {
     data.player = {x: 320, y: 320};
     data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
-    data.lastUpdate = data.startTime = Date.now();
+    data.lastUpdate = data.lastSpawnTry = data.startTime = Date.now();
     window.setInterval(GameTick, 25);
 }
 const GameTick = function() {
@@ -105,8 +105,24 @@ const GameTick = function() {
     GameDrawTick();
 }
 const GameUpdateTick = function(dt) {
-    var DIAGONAL = 0.12727922061357858 * dt, STRAIGHT = 0.18 * dt;
     data.lastUpdate = Date.now();
+    PlayerMoveFunction(0.12727922061357858 * dt, 0.18 * dt)
+    let removable = [];
+    if(Date.now() - data.lastSpawnTry > 1400){
+        data.lastSpawnTry = Date.now();
+        index = ["wave1", "wave2", "spr11", "spr21", "spr31", "spr41"][parseInt(Math.random() * 6)];
+        SpawnFunction(S_DATA[index]);
+    }
+    for(let i=0;i<data.bullets.length;i++){
+        data.bullets[i].x += (data.bullets[i].xv * dt/1000);
+        data.bullets[i].y += (data.bullets[i].yv * dt/1000);
+        // Collision check here
+        data.bullets[i].l -= dt/1000;
+        if(data.bullets[i].l < 0) data.bullets[i].removeFlag = true;
+    }
+    data.bullets = data.bullets.filter(RemovableFilters);
+}
+const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
     switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
         case 12:
             data.player.x -= DIAGONAL;
@@ -143,15 +159,6 @@ const GameUpdateTick = function(dt) {
     }
     data.player.x = Math.max(16, Math.min(604, data.player.x));
     data.player.y = Math.max(16, Math.min(604, data.player.y));
-    let removable = [];
-    for(let i=0;i<data.bullets.length;i++){
-        data.bullets[i].x += (data.bullets[i].xv * dt/1000);
-        data.bullets[i].y += (data.bullets[i].yv * dt/1000);
-        // Collision check here
-        data.bullets[i].l -= dt/1000;
-        if(data.bullets[i].l < 0) data.bullets[i].removeFlag = true;
-    }
-    data.bullets = data.bullets.filter(RemovableFilters);
 }
 const SpawnFunction = function(arr) {
     for(let i of arr){
