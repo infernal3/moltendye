@@ -118,7 +118,7 @@ const GameUpdateTick = function(dt) {
         data.bullets[i].x += (data.bullets[i].xv * dt/1000);
         data.bullets[i].y += (data.bullets[i].yv * dt/1000);
         let dcoef = Math.sqrt(Math.pow(data.player.x - data.bullets[i].x, 2) + Math.pow(data.player.y - data.bullets[i].y, 2));
-        if(dcoef <= 16 + data.bullets[i].r] {
+        if(dcoef <= 16 + data.bullets[i].r) {
             // A collision occurred!
             data.bullets[i].removeFlag = true;
             console.log("player took damage from bullet: "+JSON.stringify(data.bullets[i]));
