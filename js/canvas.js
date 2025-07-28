@@ -14,7 +14,7 @@ const LoadFunction = function() {
     cv().height = wy() - 16;
     TitleScreen();
 }
-const RemovableFilters = function(E) { return E.removeFlag; }
+const RemovableFilters = function(E) { return !E.removeFlag; }
 const PreventDefault = function(E) { E.preventDefault(); }
 const ClickHandler = function(E) {
     for (var i of clickables){
