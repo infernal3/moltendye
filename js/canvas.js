@@ -140,11 +140,11 @@ const GameUpdateTick = function(dt) {
     if(Date.now() - data.lastSpawnTry > (1700 / data.options.difficulty)){
         data.lastSpawnTry = Date.now();
         let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
-        if(difficulty > 1.4){
+        if(data.options.difficulty > 1.4){
             array.push("medium1", "medium2");
-        } if(difficulty > 1.7){
+        } if(data.options.difficulty > 1.7){
             array.push("medium3", "medium4");
-        } if(difficulty > 2){
+        } if(data.options.difficulty > 2){
             S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 40 5.49778714378 5 1`,
                            `${data.player.x-120} ${data.player.y+120} 40 0.7853981633974483 5 1`,
                            `${data.player.x+120} ${data.player.y+120} 40 2.356194490192345 5 1`,
