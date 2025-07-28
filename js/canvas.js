@@ -28,6 +28,7 @@ const TitleScreen = function() {
     cx().font = "30px monospace";
     cx().fillText("Quit Game", 40, 360);
     if(wx() < 640 || wy() < 640) {
+        cx().font = "14px monospace";
         cx().fillText("Your screen is too small to play!", 0, 40);
         cx().fillText(`Current dims: (${wx()}, ${wy()})`, 0, 80);
         cx().fillText(`Required: (640, 640) or more`, 0, 120);
@@ -94,7 +95,7 @@ const GameDrawTick = function() {
     cx().rect(2, 2, 620, 620);
     cx().stroke();
     cx().beginPath();
-    cx().circle(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
+    cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
     cx().stroke();
 }
 cv().addEventListener("contextMenu",PreventDefault,{passive: false});
