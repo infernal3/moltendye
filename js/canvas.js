@@ -111,7 +111,7 @@ const GameUpdateTick = function(dt) {
     let removable = [];
     if(Date.now() - data.lastSpawnTry > 1700){
         data.lastSpawnTry = Date.now();
-        index = ["wave1", "wave2", "spr11", "spr21", "spr31", "spr41"][parseInt(Math.random() * 6)];
+        index = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"][parseInt(Math.random() * 10)];
         SpawnFunction(S_DATA[index]);
     }
     for(let i=0;i<data.bullets.length;i++){
