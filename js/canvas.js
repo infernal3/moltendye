@@ -130,6 +130,9 @@ const GameUpdateTick = function(dt) {
     }
     data.bullets = data.bullets.filter(RemovableFilters);
 }
+const GameOverDrawImageHelper = function() {
+    cx().drawImage(this, 50, 25, 540, 324);
+}
 const GameOver = function() {
     window.clearInterval(data.bufferID);
     data.menu = 4;
@@ -139,7 +142,7 @@ const GameOver = function() {
         img.src = "https://infernal3.github.io/moltendye/image/game_over.png";
         img.width = "40px";
         img.height = "24px";
-        img.addEventListener("load",()=>{cx().drawImage(this, 50, 25, 540, 324);})
+        img.addEventListener("load",GameOverDrawImageHelper);
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
     }, 200);
