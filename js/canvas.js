@@ -145,6 +145,9 @@ const GameOver = function() {
         img.addEventListener("load",GameOverDrawImageHelper);
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
+        cx().font = "30px monospace";
+        cx().fillText(`Return to menu`, 100, 460);
+        clickables = [{x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen}];
     }, 200);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
