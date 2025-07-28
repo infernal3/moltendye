@@ -99,11 +99,19 @@ const Options = function() {
     
     cx().font = "16px monospace";
     cx().fillText("[WORK IN PROGRESS]", 20, 200);
-    cx().fillText(`Player difficulty: ${data.options.difficulty}`, 20, 240);
+    cx().fillText(`Difficulty coefficient: ${data.options.difficulty}`, 20, 240);
     cx().strokeRect(25, 280, 200, 30);
     cx().strokeRect(300, 280, 200, 30);
-    cx().fillText("debug flag 1", 25, 280);
-    cx().fillText("debug flag 2", 300, 280);
+    cx().fillText("Increase Difficulty", 25, 300);
+    clickables.push({x1: 25, x2: 225, y1: 280, y2: 310, handler: () => {
+        options.player.difficulty *= 1.1;
+        Options();
+    } });
+    clickables.push({x1: 300, x2: 500, y1: 280, y2: 310, handler: () => {
+        options.player.difficulty /= 1.1;
+        Options();
+    } });
+    cx().fillText("Decrease Difficulty", 300, 300);
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 520);
     clickables.push({x1: 20, x2: 520, y1: 500, y2: 540, handler: TitleScreen});
