@@ -53,7 +53,7 @@ const GameTick = function() {
     GameDrawTick();
 }
 const GameUpdateTick = function(dt) {
-    var DIAGONAL = 0.028284271247461905 * dt, STRAIGHT = 0.04 * dt;
+    var DIAGONAL = 0.06363961030678929 * dt, STRAIGHT = 0.09 * dt;
     data.lastUpdate = Date.now();
     switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
         case 12:
