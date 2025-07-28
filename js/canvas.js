@@ -86,7 +86,7 @@ const TitleScreen = function() {
         return;
     }
     clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: StartGame});
-    clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: ()=>{console.log("Options")} });
+    clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: Options});
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
 }
@@ -98,9 +98,12 @@ const Options = function() {
     cx().fillText("Options Menu", 180, 60);
     
     cx().font = "16px monospace";
-    cx().fillText("Sorry, we don't have anything here yet", 20, 200);
+    cx().fillText("[WORK IN PROGRESS]", 20, 200);
+    cx().fillText(`Player difficulty: ${data.options.difficulty}`, 20, 240);
+    cx().strokeRect(25, 280, 200, 20);
+    cx().strokeRect(300, 280, 200, 20);
     cx().font = "30px monospace";
-    cx().fillText(`Return to menu`, 100, 460);
+    cx().fillText(`Return to menu`, 20, 520);
     clickables.push({x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen});
 }
 const StartGame = function() {
