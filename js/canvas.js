@@ -139,8 +139,17 @@ const GameUpdateTick = function(dt) {
     let removable = [];
     if(Date.now() - data.lastSpawnTry > (1700 / data.options.difficulty)){
         data.lastSpawnTry = Date.now();
-        index = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"][parseInt(Math.random() * 10)];
-        SpawnFunction(S_DATA[index]);
+        let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
+        if(difficulty > 1.4){
+            array.push("medium1", "medium2");
+        } if(difficulty > 1.7){
+            array.push("medium3", "medium4");
+        } if(difficulty > 2){
+            array.push("hard1", "hard2");
+        } if(difficulty > 2.6){
+            array.push("harder1");
+        }
+        SpawnFunction(S_DATA[array[parseInt(Math.random() * array.length)]]);
     }
     for(let i=0;i<data.bullets.length;i++){
         SPEED_MODIFIER = data.options.difficulty * dt/1000;
