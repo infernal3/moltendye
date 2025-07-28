@@ -94,8 +94,9 @@ const StartGame = function() {
     cx().reset();
     data.menu = -1;
     data.player = {x: 320, y: 320};
+    data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
-    data.lastUpdate = Date.now();
+    data.lastUpdate = data.startTime = Date.now();
     window.setInterval(GameTick, 25);
 }
 const GameTick = function() {
