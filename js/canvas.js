@@ -22,6 +22,56 @@ const ClickHandler = function(E) {
         }
     }
 }
+const KeyUpHandler = function(E) {
+    if(data.menu >= 0) return;
+    switch(E.key){
+        case "a":
+        case "A":
+        case "LeftArrow":
+            data.controls.left = false;
+            break;
+        case "w":
+        case "W":
+        case "UpArrow":
+            data.controls.up = false;
+            break;
+        case "s":
+        case "S":
+        case "DownArrow":
+            data.controls.down = false;
+            break;
+        case "d":
+        case "D":
+        case "RightArrow":
+            data.controls.right = false;
+            break;
+    }
+}
+const KeyUpHandler = function(E) {
+    if(data.menu >= 0) return;
+    switch(E.key){
+        case "a":
+        case "A":
+        case "LeftArrow":
+            data.controls.left = true;
+            break;
+        case "w":
+        case "W":
+        case "UpArrow":
+            data.controls.up = true;
+            break;
+        case "s":
+        case "S":
+        case "DownArrow":
+            data.controls.down = true;
+            break;
+        case "d":
+        case "D":
+        case "RightArrow":
+            data.controls.right = true;
+            break;
+    }
+}
 const TitleScreen = function() {
     clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
@@ -98,6 +148,8 @@ const GameDrawTick = function() {
     cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
     cx().stroke();
 }
-cv().addEventListener("contextMenu",PreventDefault,{passive: false});
+window.addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
 window.addEventListener("load",LoadFunction,{passive: true});
+window.addEventListener("keyup",KeyUpHandler,{passive: true});
+window.addEventListener("keydown",KeyDownHandler,{passive: true});
