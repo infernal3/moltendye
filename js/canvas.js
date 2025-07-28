@@ -139,10 +139,10 @@ const GameOver = function() {
         img.src = "./image/game_over.png";
         img.width = "40px";
         img.height = "24px";
-        cx().drawImage(img, 50, 25, 540, 324)
+        img.addEventListener("load",()=>{cx().drawImage(this, 50, 25, 540, 324);})
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
-    }, 500);
+    }, 200);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
     switch((data.controls.left ? 8 : 0) + (data.controls.up ? 4 : 0) + (data.controls.down ? 2 : 0) + (data.controls.right ? 1 : 0)){
