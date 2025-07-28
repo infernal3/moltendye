@@ -145,10 +145,10 @@ const GameUpdateTick = function(dt) {
         } if(data.options.difficulty > 1.7){
             array.push("medium3", "medium4");
         } if(data.options.difficulty > 2){
-            S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 40 5.49778714378 5 1`,
-                           `${data.player.x-120} ${data.player.y+120} 40 0.7853981633974483 5 1`,
-                           `${data.player.x+120} ${data.player.y+120} 40 2.356194490192345 5 1`,
-                           `${data.player.x+120} ${data.player.y-120} 40 3.9269908169872414 5 1`
+            S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 50 5.49778714378 5 2`,
+                           `${data.player.x-120} ${data.player.y+120} 50 0.7853981633974483 5 2`,
+                           `${data.player.x+120} ${data.player.y+120} 50 2.356194490192345 5 2`,
+                           `${data.player.x+120} ${data.player.y-120} 50 3.9269908169872414 5 2`
                           ];
             array.push("hard");
         }
