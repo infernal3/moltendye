@@ -222,6 +222,7 @@ const GameOver = function() {
         cx().font = "30px monospace";
         cx().fillText(`Return to menu`, 100, 470);
         clickables = [{x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen}];
+        DrawDebugInfo();
     }, 200);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
