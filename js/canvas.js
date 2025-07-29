@@ -171,9 +171,9 @@ const GameUpdateTick = function(dt) {
         
         let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
         if(Ecoef > 1.4){
-            array.push("medium1", "medium2");
+            array.push("medium2", "medium4"); // "medium1" is apparently very difficult so i moved it down
         } if(Ecoef > 1.7){
-            array.push("medium3", "medium4");
+            array.push("medium1", "medium3");
         } if(Ecoef > 2){
             S_DATA.hard = [`${data.player.x-120} ${data.player.y-120} 50 5.49778714378 5 2`,
                            `${data.player.x-120} ${data.player.y+120} 50 0.7853981633974483 5 2`,
