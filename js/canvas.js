@@ -171,7 +171,7 @@ const GameUpdateTick = function(dt) {
         
         let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
         if(Ecoef > 1.4){
-            array.push("medium2", "medium4"); // "medium1" is apparently very difficult so i moved it down
+            array.push("medium2", "medium4"); // see spawns.js for more info
         } if(Ecoef > 1.7){
             array.push("medium1", "medium3");
         } if(Ecoef > 2){
@@ -222,7 +222,7 @@ const GameOver = function() {
         cx().font = "30px monospace";
         cx().fillText(`Return to menu`, 100, 470);
         clickables = [{x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen}];
-        DrawDebugInfo();
+        if(data.options.debug) DrawDebugInfo();
     }, 200);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
@@ -286,7 +286,8 @@ const GameDrawTick = function() {
     cx().beginPath();
     cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
     cx().stroke();
-    
+    cx().font = "11px monospace";
+    cx().fillText(""+data.playerHealth, data.player.x+2, data.player.y+5);
     for(let i of data.bullets){
         cx().beginPath();
         cx().arc(i.x, i.y, i.r, 0, 2 * Math.PI, false);
