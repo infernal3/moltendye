@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1, color: 1}};
+const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30}};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -102,7 +102,13 @@ const Options = function() {
     cx().fillText("Options Menu", 180, 60);
     
     cx().font = "16px monospace";
-    cx().fillText("[WORK IN PROGRESS]", 20, 200);
+    cx().fillText(`Ticks/Second: ${data.options.tps}`, 20, 130);
+    cx().strokeRect(25, 170, 200, 30);
+    cx().fillText("Change Ticks/Second", 30, 190);
+    clickables.push({x1: 25, x2: 225, y1: 170, y2: 200, handler: () => {
+        data.options.tps = data.options.tps > 100 ? 15 : data.options.tps * 2;
+        Options();
+    } });
     cx().fillText(`Difficulty coefficient: ${data.options.difficulty.toFixed(3)}`, 20, 240);
     cx().strokeRect(25, 280, 200, 30);
     cx().strokeRect(300, 280, 200, 30);
@@ -142,7 +148,7 @@ const StartGame = function() {
     data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
     data.lastUpdate = data.lastSpawnTry = data.startTime = Date.now();
-    data.bufferID = window.setInterval(GameTick, 25);
+    data.bufferID = window.setInterval(GameTick, parseInt(1000 / data.options.tps));
 }
 const GameTick = function() {
     GameUpdateTick(Date.now() - data.lastUpdate);
