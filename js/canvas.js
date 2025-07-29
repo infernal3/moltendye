@@ -91,6 +91,7 @@ const TitleScreen = function() {
     clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: Options});
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
+    cx().fillText("infernal3's Bullet Hell", 20, 50);
 }
 const Options = function() {
     clickables = [];
@@ -287,7 +288,7 @@ const GameDrawTick = function() {
     cx().arc(data.player.x, data.player.y, 16, 0, 2 * Math.PI, false);
     cx().stroke();
     cx().font = "11px monospace";
-    cx().fillText(""+data.playerHealth, data.player.x+2, data.player.y+5);
+    cx().fillText(""+data.playerHealth, data.player.x-2, data.player.y+5);
     for(let i of data.bullets){
         cx().beginPath();
         cx().arc(i.x, i.y, i.r, 0, 2 * Math.PI, false);
