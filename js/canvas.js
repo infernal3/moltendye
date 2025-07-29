@@ -295,7 +295,16 @@ const GameDrawTick = function() {
 }
 const DrawDebugInfo = function() {
     cx().font = "11px monospace";
-    cx().fillText(JSON.stringify(data), 640, 50);
+    cx().fillText("player: "+JSON.stringify(data.player), 640, 50);
+    cx().fillText("playerHealth: "+data.playerHealth, 640, 65);
+    cx().fillText("bullets: "+data.bullets.length, 640, 80);
+    cx().fillText("bulletsRaw: "+JSON.stringify(data.bullets), 640, 200);
+    cx().fillText("controls: "+JSON.stringify(data.controls), 640, 95);
+    cx().fillText("options: "+JSON.stringify(data.options), 640, 110);
+    cx().fillText("lastUpdate: "+data.lastUpdate, 640, 125);
+    cx().fillText("lastSpawnTry: "+data.lastSpawnTry, 640, 140);
+    cx().fillText("startTime: "+data.startTime, 640, 155);
+    cx().fillText("effective_difficulty: "+(data.options.difficulty + ((data.lastUpdate - data.startTime)/360000)), 640, 170);
 }
 window.addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
