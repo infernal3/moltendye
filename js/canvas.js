@@ -205,7 +205,7 @@ const GameOver = function() {
         img.addEventListener("load",GameOverDrawImageHelper);
         cx().font = "20px monospace";
         cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
-        cx().fillText(`Your Difficulty coefficient was ${data.options.difficulty}`, 100, 430);
+        cx().fillText(`Your difficulty coefficient was ${data.options.difficulty.toFixed(3)}.`, 100, 430);
         cx().font = "30px monospace";
         cx().fillText(`Return to menu`, 100, 470);
         clickables = [{x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen}];
