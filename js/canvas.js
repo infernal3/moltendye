@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30}};
+const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false}};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -133,9 +133,16 @@ const Options = function() {
         cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         Options();
     } });
+    cx().fillText(`Debug Info: ${data.options.debug ? "ON" : "OFF"}`, 20, 460);
+    cx().fillText("Toggle Debug Info", 30, 520);
+    cx().strokeRect(25, 500, 200, 30);
+    clickables.push({x1: 25, x2: 225, y1: 500, y2: 530, handler: () => {
+        data.options.debug = !data.options.debug;
+        Options();
+    } });
     cx().font = "30px monospace";
-    cx().fillText(`Return to menu`, 20, 520);
-    clickables.push({x1: 20, x2: 520, y1: 500, y2: 540, handler: TitleScreen});
+    cx().fillText(`Return to menu`, 20, 580);
+    clickables.push({x1: 20, x2: 500, y1: 550, y2: 580, handler: TitleScreen});
 }
 const StartGame = function() {
     clickables = [];
@@ -284,6 +291,11 @@ const GameDrawTick = function() {
         cx().arc(i.x, i.y, i.r, 0, 2 * Math.PI, false);
         cx().stroke();
     }
+    if(data.options.debug) DrawDebugInfo();
+}
+const DrawDebugInfo = function() {
+    cx().font = "11px monospace";
+    cx().fillText(JSON.stringify(data), 640, 50);
 }
 window.addEventListener("contextMenu",PreventDefault,{passive: false});
 cv().addEventListener("mouseup",ClickHandler,{passive: true});
