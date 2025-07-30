@@ -103,6 +103,7 @@ const Options = function() {
     cx().fillText("Options Menu", 180, 60);
     
     cx().font = "16px monospace";
+    cx().fillText("Movement Controls: WASD (Cannot change)", 20, 105);
     cx().fillText(`Ticks/Second: ${data.options.tps}`, 20, 130);
     cx().strokeRect(25, 170, 200, 30);
     cx().fillText("Change Ticks/Second", 30, 190);
