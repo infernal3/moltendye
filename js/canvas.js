@@ -185,7 +185,7 @@ const Achievements = function() {
     for(let i = 0; i < 3; i++){
         for(let j=0; j < 3; j++){
             cx().strokeRect(40+(i*120), 160+(j*120), 120, 120);
-            if(data.achievements.find(E => E == (j*3) + i + 1) == (j*3) + i + 1) cx().fillText(A_DATA[(j*3) + i].name, 50+(i*120), 234+(j*120));
+            if(data.achievements.find(E => E == (j*3) + i + 1) == (j*3) + i + 1) cx().fillText(A_DATA[(j*3) + i].name, 50+(i*120), 229+(j*120));
             clickables.push({x1:(40+(i*120)), x2:(160+(i*120)), y1:(160+(j*120)), y2:(280+(j*120)), handler: () => {
                 data.options.selection = (j*3) + i;
                 Achievements();
@@ -292,6 +292,7 @@ const GameOver = function() {
         if(ST >= 108 && data.options.difficulty > 1.8) AddAchievement(6);
         if(ST >= 6 && data.options.difficulty > 5) AddAchievement(7);
         if(ST >= 600) AddAchievement(8);
+        if(ST <= 0.250) AddAchievement(9);
         
     }, 200);
 }
