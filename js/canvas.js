@@ -224,8 +224,10 @@ const GameUpdateTick = function(dt) {
     if(Date.now() - data.lastSpawnTry > (1700 / Ecoef)){
         data.lastSpawnTry = Date.now();
         
-        let array = ["wave1", "wave2", "wave3", "wave4", "ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
-        if(Ecoef > 1.4){
+        let array = ["ambient1", "ambient2", "ambient3", "ambient4", "line1", "line2"];
+        if (Ecoef > 1) {
+            array.push("wave1", "wave2", "wave3", "wave4");
+        } if(Ecoef > 1.4){
             array.push("medium2", "medium4"); // see spawns.js for more info
         } if(Ecoef > 1.7){
             array.push("medium1", "medium3");
