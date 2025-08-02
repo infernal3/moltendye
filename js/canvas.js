@@ -102,6 +102,7 @@ const TitleScreen = function() {
     cx().fillText("infernal3's Bullet Hell", 20, 50);
 }
 const Options = function() {
+    if(data.options.color != 1 && data.options.tps != 30 && data.options.debug != false && data.options.difficulty != 1) AddAchievement(3);
     clickables = [];
     cx().reset();
     cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
@@ -172,6 +173,7 @@ const Achievements = function() {
     for(let i = 0; i < 3; i++){
         for(let j=0; j < 3; j++){
             cx().strokeRect(40+(i*120), 160+(j*120), 120, 120);
+            if(data.achievements.find(E => E == (j*3) + i + 1) == (j*3) + i + 1) cx().fillText(A_DATA[(j*3) + i], 50+(i*120), 205+(j*120));
             clickables.push({x1:(40+(i*120)), x2:(160+(i*120)), y1:(160+(j*120)), y2:(280+(j*120)), handler: () => {
                 data.options.selection = (j*3) + i;
                 Achievements();
@@ -181,6 +183,7 @@ const Achievements = function() {
     if(data.options.selection >= 0){
         cx().fillText(A_DATA[data.options.selection].name, 420, 200);
         cx().fillText(A_DATA[data.options.selection].lore, 420, 230);
+        if(data.achievements.find(E => E == data.options.selection + 1) == data.options.selection + 1) cx().fillText("COMPLETED", 420, 260);
     }
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
