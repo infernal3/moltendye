@@ -13,9 +13,17 @@ const SetCanvasDims = function() {
     cv().width = wx() - 16;
     cv().height = wy() - 16;
 }
+const ExportData = function() {
+    let SAVE = btoa(JSON.stringify({options: data.options, achievements: data.achievements}));
+    localStorage.setItem("moltendye",SAVE);
+}
 
 const LoadFunction = function() {
-    // I might add more here
+    if(localStorage.getItem("moltendye") != null) {
+        let SAVE = JSON.parse(atob(localStorage.getItem("moltendye")));
+        data.options = SAVE.options;
+        data.achievements = SAVE.achievements;
+    }
     TitleScreen();
 }
 const RemovableFilters = function(E) { return !E.removeFlag; }
@@ -100,6 +108,8 @@ const TitleScreen = function() {
     cx().fillText("Options", 40, 300);
     cx().fillText("Achievements", 300, 300);
     cx().fillText("infernal3's Bullet Hell", 20, 50);
+
+    ExportData();
 }
 const Options = function() {
     if(data.options.color != 1 && data.options.tps != 30 && data.options.debug != false && data.options.difficulty != 1) AddAchievement(3);
