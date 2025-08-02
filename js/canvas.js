@@ -165,14 +165,14 @@ const Achievements = function() {
         for(let j=0; j < 3; j++){
             cx().strokeRect(40+(i*120), 160+(j*120), 120, 120);
             clickables.push({x1:(40+(i*120)), x2:(160+(i*120)), y1:(160+(j*120)), y2:(280+(j*120)), handler: () => {
-                data.options.selection = (j*3) + i + 1;
+                data.options.selection = (j*3) + i;
                 Achievements();
             } });
         }
     }
-    if(data.options.selection > 0){
-        cx().fillText(A_DATA[data.options.selection].name, 520, 200);
-        cx().fillText(A_DATA[data.options.selection].lore, 520, 230);
+    if(data.options.selection >= 0){
+        cx().fillText(A_DATA[data.options.selection].name, 420, 200);
+        cx().fillText(A_DATA[data.options.selection].lore, 420, 230);
     }
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
