@@ -1,5 +1,5 @@
 const A_DATA = [
-  {id: 1, name: "Bad", lore: "Die."},
+  {id: 1, name: "First steps", lore: "Experience the game over screen."},
   {id: 2, name: "Survivor", lore: "Survive for 1 minute on any difficulty"},
   {id: 3, name: "Optional", lore: "Change all options to be different from the defaults."},
   {id: 4, name: "The Swarm", lore: "Have 100 bullets on screen at once."},
