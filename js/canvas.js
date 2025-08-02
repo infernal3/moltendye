@@ -23,6 +23,8 @@ const LoadFunction = function() {
         let SAVE = JSON.parse(atob(localStorage.getItem("moltendye")));
         data.options = SAVE.options;
         data.achievements = SAVE.achievements;
+        document.body.style = `background-color: ${data.options.color == 1 ? "#fdfdfd" : "#000000"} !important;`;
+        cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     }
     TitleScreen();
 }
