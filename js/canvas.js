@@ -275,8 +275,8 @@ const GameOver = function() {
         if(ST >= 60) AddAchievement(2);
         if(data.bullets.length >= 100) AddAchievement(4);
         if(((data.lastUpdate-data.knifeEdge)/1000) >= 120) AddAchievement(5);
-        if(ST >= 108 && game.options.difficulty > 1.8) AddAchievement(6);
-        if(ST >= 6 && game.options.difficulty > 5) AddAchievement(7);
+        if(ST >= 108 && data.options.difficulty > 1.8) AddAchievement(6);
+        if(ST >= 6 && data.options.difficulty > 5) AddAchievement(7);
         if(ST >= 600) AddAchievement(8);
         
     }, 200);
