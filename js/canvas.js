@@ -157,16 +157,18 @@ const Achievements = function() {
     cx().font = "35px monospace";
     cx().fillText("Achievements Menu", 120, 60);
     cx().font = "14px monospace";
-    cx().fillText(`${data.achievements.length} / 9 unlocked`, 180, 100);
-    cx().strokeRect(40, 120, 120, 120);
-    cx().strokeRect(160, 120, 120, 120);
-    cx().strokeRect(280, 120, 120, 120);
-    cx().strokeRect(40, 240, 120, 120);
-    cx().strokeRect(160, 240, 120, 120);
-    cx().strokeRect(280, 240, 120, 120);
-    cx().strokeRect(40, 360, 120, 120);
-    cx().strokeRect(160, 360, 120, 120);
-    cx().strokeRect(280, 360, 120, 120);
+    cx().fillText(`${data.achievements.length} / 9 unlocked`, 160, 100);
+    cx().fillText("Earn achievements by completing special tasks!", 35, 120);
+    cx().fillText("Hover over an achievement to view its information [WIP]", 20, 140);
+    cx().strokeRect(40, 160, 120, 120);
+    cx().strokeRect(160, 160, 120, 120);
+    cx().strokeRect(280, 160, 120, 120);
+    cx().strokeRect(40, 280, 120, 120);
+    cx().strokeRect(160, 280, 120, 120);
+    cx().strokeRect(280, 280, 120, 120);
+    cx().strokeRect(40, 400, 120, 120);
+    cx().strokeRect(160, 400, 120, 120);
+    cx().strokeRect(280, 400, 120, 120);
 
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
