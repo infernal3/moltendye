@@ -9,9 +9,13 @@ const wy = () => window.innerHeight;
 const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false, selection: -1}, achievements: []};
 var clickables = [];
 
-const LoadFunction = function() {
+const SetCanvasDims = function() {
     cv().width = wx() - 16;
     cv().height = wy() - 16;
+}
+
+const LoadFunction = function() {
+    // I might add more here
     TitleScreen();
 }
 const RemovableFilters = function(E) { return !E.removeFlag; }
@@ -74,6 +78,7 @@ const KeyDownHandler = function(E) {
     }
 }
 const TitleScreen = function() {
+    SetCanvasDims();
     clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
     data.options.selection = -1;
@@ -148,6 +153,9 @@ const Options = function() {
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
     clickables.push({x1: 20, x2: 500, y1: 550, y2: 580, handler: TitleScreen});
+}
+const AddAchievement = function(I) {
+    if(data.achievements.find(E => E == I) != I) data.achievements.push(I);
 }
 const Achievements = function() {
     clickables = [];
@@ -226,8 +234,9 @@ const GameUpdateTick = function(dt) {
         if(dcoef <= 16 + data.bullets[i].r) {
             // A collision occurred!
             data.bullets[i].removeFlag = true;
-            console.log("player took damage from bullet: "+JSON.stringify(data.bullets[i]));
+            
             data.playerHealth--;
+            if(data.playerHealth == 1) data.knifeEdge = Date.now();
             if(data.playerHealth <= 0) GameOver();
         }
         data.bullets[i].l -= dt/1000;
@@ -251,12 +260,22 @@ const GameOver = function() {
         img.height = "24px";
         img.addEventListener("load",GameOverDrawImageHelper);
         cx().font = "20px monospace";
-        cx().fillText(`You survived ${((data.lastUpdate-data.startTime)/1000)} seconds.`, 100, 400);
+        let ST = (data.lastUpdate-data.startTime)/1000;
+        cx().fillText(`You survived ${ST} seconds.`, 100, 400);
         cx().fillText(`Your difficulty coefficient was ${data.options.difficulty.toFixed(3)}.`, 100, 430);
         cx().font = "30px monospace";
         cx().fillText(`Return to menu`, 100, 470);
         clickables = [{x1: 100, x2: 600, y1: 440, y2: 480, handler: TitleScreen}];
         if(data.options.debug) DrawDebugInfo();
+
+        AddAchievement(1);
+        if(ST >= 60) AddAchievement(2);
+        if(data.bullets.length >= 100) AddAchievement(4);
+        if(((data.lastUpdate-data.knifeEdge)/1000) >= 120) AddAchievement(5);
+        if(ST >= 108 && game.options.difficulty > 1.8) AddAchievement(6);
+        if(ST >= 6 && game.options.difficulty > 5) AddAchievement(7);
+        if(ST >= 600) AddAchievement(8);
+        
     }, 200);
 }
 const PlayerMoveFunction = function(DIAGONAL, STRAIGHT){
