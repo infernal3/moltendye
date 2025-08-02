@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false}};
+const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false}, achievements: []};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -89,8 +89,10 @@ const TitleScreen = function() {
     }
     clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: StartGame});
     clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: Options});
+    clickables.push({x1: 300, y1: 270, x2: 620, y2: 300, handler: Achievements});
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
+    cx().fillText("Achievements", 300, 300);
     cx().fillText("infernal3's Bullet Hell", 20, 50);
 }
 const Options = function() {
@@ -142,6 +144,30 @@ const Options = function() {
         data.options.debug = !data.options.debug;
         Options();
     } });
+    cx().font = "30px monospace";
+    cx().fillText(`Return to menu`, 20, 580);
+    clickables.push({x1: 20, x2: 500, y1: 550, y2: 580, handler: TitleScreen});
+}
+const Achievements = function() {
+    clickables = [];
+    cx().reset();
+    cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
+    cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
+    data.menu = 12;
+    cx().font = "35px monospace";
+    cx().fillText("Achievements Menu", 120, 60);
+    cx().font = "14px monospace";
+    cx().fillText(`${data.achievements.length} / 9 unlocked`, 180, 100);
+    cx().strokeRect(40, 120, 120, 120);
+    cx().strokeRect(160, 120, 120, 120);
+    cx().strokeRect(280, 120, 120, 120);
+    cx().strokeRect(40, 240, 120, 120);
+    cx().strokeRect(160, 240, 120, 120);
+    cx().strokeRect(280, 240, 120, 120);
+    cx().strokeRect(40, 360, 120, 120);
+    cx().strokeRect(160, 360, 120, 120);
+    cx().strokeRect(280, 360, 120, 120);
+
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
     clickables.push({x1: 20, x2: 500, y1: 550, y2: 580, handler: TitleScreen});
