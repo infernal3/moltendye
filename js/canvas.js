@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false}, achievements: []};
+const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false, selection: -1}, achievements: []};
 var clickables = [];
 
 const LoadFunction = function() {
@@ -76,6 +76,7 @@ const KeyDownHandler = function(E) {
 const TitleScreen = function() {
     clickables = [{x1: 40, y1: 330, x2: 340, y2: 360, handler: ()=>{window.location.href = "https://infernal3.github.io/#"} }];
     cx().reset();
+    data.options.selection = -1;
     cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
     cx().font = "30px monospace";
@@ -158,18 +159,21 @@ const Achievements = function() {
     cx().fillText("Achievements Menu", 120, 60);
     cx().font = "14px monospace";
     cx().fillText(`${data.achievements.length} / 9 unlocked`, 160, 100);
-    cx().fillText("Earn achievements by completing special tasks!", 35, 120);
-    cx().fillText("Hover over an achievement to view its information [WIP]", 20, 140);
-    cx().strokeRect(40, 160, 120, 120);
-    cx().strokeRect(160, 160, 120, 120);
-    cx().strokeRect(280, 160, 120, 120);
-    cx().strokeRect(40, 280, 120, 120);
-    cx().strokeRect(160, 280, 120, 120);
-    cx().strokeRect(280, 280, 120, 120);
-    cx().strokeRect(40, 400, 120, 120);
-    cx().strokeRect(160, 400, 120, 120);
-    cx().strokeRect(280, 400, 120, 120);
-
+    cx().fillText("Earn achievements by completing special tasks!", 160, 120);
+    cx().fillText("Click on an achievement to view its info [WIP]", 160, 140);
+    for(let i = 0; i < 3; i++){
+        for(let j=0; j < 3; j++){
+            cx().strokeRect(40+(i*120), 160+(j*120), 120, 120);
+            clickables.push({x1:(40+(i*120)), x2:(160+(i*120)), y1:(160+(j*120)), y2:(280+(j*120)), handler: () => {
+                data.options.selection = (j*3) + i + 1;
+                Achievements();
+            } });
+        }
+    }
+    if(data.options.selection > 0){
+        cx().fillText(A_DATA[data.options.selection].name, 520, 200);
+        cx().fillText(A_DATA[data.options.selection].lore, 520, 230);
+    }
     cx().font = "30px monospace";
     cx().fillText(`Return to menu`, 20, 580);
     clickables.push({x1: 20, x2: 500, y1: 550, y2: 580, handler: TitleScreen});
