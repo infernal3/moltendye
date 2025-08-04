@@ -6,7 +6,7 @@ const cv = () => el("app");
 const cx = () => cv().getContext("2d");
 const wx = () => window.innerWidth;
 const wy = () => window.innerHeight;
-const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false, selection: -1}, achievements: []};
+const data = {menu: 0, options: {difficulty: 1, color: 1, tps: 30, debug: false, controls: 0, selection: -1}, achievements: []};
 var clickables = [];
 
 const SetCanvasDims = function() {
@@ -131,40 +131,40 @@ const Options = function() {
     cx().font = "16px monospace";
     cx().fillText("Movement Controls: WASD (Cannot change)", 20, 105);
     cx().fillText(`Ticks/Second: ${data.options.tps}`, 20, 130);
-    cx().strokeRect(25, 170, 200, 30);
-    cx().fillText("Change Ticks/Second", 30, 190);
-    clickables.push({x1: 25, x2: 225, y1: 170, y2: 200, handler: () => {
+    cx().strokeRect(25, 145, 200, 30);
+    cx().fillText("Change Ticks/Second", 30, 165);
+    clickables.push({x1: 25, x2: 225, y1: 140, y2: 170, handler: () => {
         data.options.tps = data.options.tps > 100 ? 15 : data.options.tps * 2;
         Options();
     } });
-    cx().fillText(`Difficulty coefficient: ${data.options.difficulty.toFixed(3)}`, 20, 240);
-    cx().strokeRect(25, 280, 200, 30);
-    cx().strokeRect(300, 280, 200, 30);
-    cx().fillText("Increase Difficulty", 30, 300);
-    clickables.push({x1: 25, x2: 225, y1: 280, y2: 310, handler: () => {
+    cx().fillText(`Difficulty coefficient: ${data.options.difficulty.toFixed(3)}`, 20, 215);
+    cx().strokeRect(25, 230, 200, 30);
+    cx().strokeRect(300, 230, 200, 30);
+    cx().fillText("Increase Difficulty", 30, 250);
+    clickables.push({x1: 25, x2: 225, y1: 230, y2: 260, handler: () => {
         data.options.difficulty *= 1.1;
         if(data.options.difficulty > 10) data.options.difficulty = 10.834705943388395;
         Options();
     } });
-    clickables.push({x1: 300, x2: 500, y1: 280, y2: 310, handler: () => {
+    clickables.push({x1: 300, x2: 500, y1: 230, y2: 260, handler: () => {
         data.options.difficulty /= 1.1;
         if(data.options.difficulty < 0.7) data.options.difficulty = 0.6830134553650705;
         Options();
     } });
-    cx().fillText("Decrease Difficulty", 305, 300);
-    cx().fillText(`Color scheme: ${data.options.color == 1 ? "Light":"Dark"}`, 20, 350);
-    cx().fillText("Change color scheme", 30, 410);
-    cx().strokeRect(25, 390, 200, 30);
-    clickables.push({x1: 25, x2: 225, y1: 390, y2: 420, handler: () => {
+    cx().fillText("Decrease Difficulty", 305, 250);
+    cx().fillText(`Color scheme: ${data.options.color == 1 ? "Light":"Dark"}`, 20, 300);
+    cx().fillText("Change color scheme", 30, 340);
+    cx().strokeRect(25, 320, 200, 30);
+    clickables.push({x1: 25, x2: 225, y1: 320, y2: 350, handler: () => {
         data.options.color = 1 - data.options.color;
         document.body.style = `background-color: ${data.options.color == 1 ? "#fdfdfd" : "#000000"} !important;`;
         cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         Options();
     } });
-    cx().fillText(`Debug Info: ${data.options.debug ? "ON" : "OFF"}`, 20, 460);
-    cx().fillText("Toggle Debug Info", 30, 520);
-    cx().strokeRect(25, 500, 200, 30);
-    clickables.push({x1: 25, x2: 225, y1: 500, y2: 530, handler: () => {
+    cx().fillText(`Debug Info: ${data.options.debug ? "ON" : "OFF"}`, 20, 390);
+    cx().fillText("Toggle Debug Info", 30, 430);
+    cx().strokeRect(25, 410, 200, 30);
+    clickables.push({x1: 25, x2: 225, y1: 410, y2: 440, handler: () => {
         data.options.debug = !data.options.debug;
         Options();
     } });
