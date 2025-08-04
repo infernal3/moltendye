@@ -98,18 +98,23 @@ const TitleScreen = function() {
     cx().fillText("Quit Game", 40, 360);
     if(wx() < 640 || wy() < 640) {
         cx().font = "14px monospace";
-        cx().fillText("Your screen is too small to play!", 0, 40);
-        cx().fillText(`Current dims: (${wx()}, ${wy()})`, 0, 80);
-        cx().fillText(`Required: (640, 640) or more`, 0, 120);
-        return;
+        cx().fillText("Screen Size Warning", 0, 40);
+        cx().fillText(`Current size: (${wx()}, ${wy()})`, 0, 60);
+        cx().fillText(`Recommended: (640, 640) or more`, 0, 80);
+        cx().font = "9px monospace";
+        cx().fillText("SOME GAME ELEMENTS MAY CLIP OUTSIDE SCREEN", 0, 100);
+    } else {
+        cx().font = "30px monospace";
+        cx().fillText("infernal3's Bullet Hell", 20, 50);
     }
+    cx().font = "30px monospace";
     clickables.push({x1: 40, y1: 210, x2: 340, y2: 240, handler: StartGame});
     clickables.push({x1: 40, y1: 270, x2: 340, y2: 300, handler: Options});
     clickables.push({x1: 300, y1: 270, x2: 620, y2: 300, handler: Achievements});
     cx().fillText("Start Game", 40, 240);
     cx().fillText("Options", 40, 300);
     cx().fillText("Achievements", 300, 300);
-    cx().fillText("infernal3's Bullet Hell", 20, 50);
+    
 
     ExportData();
 }
