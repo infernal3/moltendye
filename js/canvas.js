@@ -121,7 +121,7 @@ const TitleScreen = function() {
     ExportData();
 }
 const Options = function() {
-    if(data.options.color != 1 && data.options.tps != 30 && data.options.debug != false && data.options.difficulty != 1) AddAchievement(3);
+    if(data.options.color != 1 && data.options.tps != 30 && data.options.debug != false && data.options.difficulty != 1 && data.options.controls != 0) AddAchievement(3);
     clickables = [];
     cx().reset();
     cx().fillStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
@@ -170,7 +170,7 @@ const Options = function() {
         Options();
     } });
     cx().fillText(`Movement controls: ${data.options.controls == 1 ? "Clickables" : "WASD (Keyboard)"}`, 20, 480);
-    cx().fillText("Change Controls WIP", 30, 520);
+    cx().fillText("Change Controls", 30, 520);
     cx().strokeRect(25, 500, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 500, y2: 530, handler: () => {
         data.options.controls = data.options.controls == 0 ? 1 : 0;
@@ -224,7 +224,7 @@ const StartGame = function() {
     data.playerHealth = 3;
     data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
-    // WIP IMPLEMENT
+    // clickable controls omg!!
     if(data.options.controls == 1){
         clickables.push({x1: 70, x2: 120, y1: 20, y2: 70, handler: () => {
             data.controls.up = !data.controls.up;
