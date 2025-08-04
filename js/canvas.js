@@ -157,7 +157,7 @@ const Options = function() {
     cx().fillText("Change color scheme", 30, 340);
     cx().strokeRect(25, 320, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 320, y2: 350, handler: () => {
-        data.options.color = 1 - data.options.color;
+        data.options.color = data.options.color == 0 ? 1 : 0;
         document.body.style = `background-color: ${data.options.color == 1 ? "#fdfdfd" : "#000000"} !important;`;
         cx().strokeStyle = data.options.color == 1 ? "#000000" : "#fdfdfd";
         Options();
@@ -166,14 +166,14 @@ const Options = function() {
     cx().fillText("Toggle Debug Info", 30, 430);
     cx().strokeRect(25, 410, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 410, y2: 440, handler: () => {
-        data.options.debug = !data.options.debug;
+        data.options.debug = data.options.debug ? false : true; // undefined check
         Options();
     } });
     cx().fillText(`Movement controls: ${data.options.controls == 1 ? "Clickables" : "WASD (Keyboard)"}`, 20, 480);
-    cx().fillText("Change Controls [WIP]", 30, 520);
+    cx().fillText("Change Controls WIP", 30, 520);
     cx().strokeRect(25, 500, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 500, y2: 530, handler: () => {
-        data.options.controls = 1 - data.options.controls;
+        data.options.controls = data.options.controls == 0 ? 1 : 0;
         Options();
     } });
     cx().font = "30px monospace";
