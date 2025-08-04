@@ -38,6 +38,7 @@ const ClickHandler = function(E) {
     }
 }
 const KeyUpHandler = function(E) {
+    if(data.options.controls == 1) return;
     if(data.menu >= 0) return;
     switch(E.key){
         case "a":
@@ -63,6 +64,7 @@ const KeyUpHandler = function(E) {
     }
 }
 const KeyDownHandler = function(E) {
+    if(data.options.controls == 1) return;
     if(data.menu >= 0) return;
     switch(E.key){
         case "a":
@@ -129,7 +131,6 @@ const Options = function() {
     cx().fillText("Options Menu", 180, 60);
     
     cx().font = "16px monospace";
-    cx().fillText("Movement Controls: WASD (Cannot change)", 20, 105);
     cx().fillText(`Ticks/Second: ${data.options.tps}`, 20, 130);
     cx().strokeRect(25, 145, 200, 30);
     cx().fillText("Change Ticks/Second", 30, 165);
@@ -166,6 +167,13 @@ const Options = function() {
     cx().strokeRect(25, 410, 200, 30);
     clickables.push({x1: 25, x2: 225, y1: 410, y2: 440, handler: () => {
         data.options.debug = !data.options.debug;
+        Options();
+    } });
+    cx().fillText(`Movement controls: ${data.options.controls == 1 ? "Clickables" : "WASD (Keyboard)"}`, 20, 480);
+    cx().fillText("Change Controls [WIP]", 30, 520);
+    cx().strokeRect(25, 500, 200, 30);
+    clickables.push({x1: 25, x2: 225, y1: 500, y2: 530, handler: () => {
+        data.options.controls = 1 - data.options.controls;
         Options();
     } });
     cx().font = "30px monospace";
@@ -216,6 +224,21 @@ const StartGame = function() {
     data.playerHealth = 3;
     data.bullets = [];
     data.controls = {left: false, up: false, down: false, right: false};
+    // WIP IMPLEMENT
+    if(data.options.controls == 1){
+        clickables.push({x1: 70, x2: 120, y1: 20, y2: 70, handler: () => {
+            data.controls.up = !data.controls.up;
+        } });
+        clickables.push({x1: 20, x2: 70, y1: 70, y2: 120, handler: () => {
+            data.controls.left = !data.controls.left;
+        } });
+        clickables.push({x1: 120, x2: 170, y1: 70, y2: 120, handler: () => {
+            data.controls.right = !data.controls.right;
+        } });
+        clickables.push({x1: 70, x2: 120, y1: 120, y2: 170, handler: () => {
+            data.controls.down = !data.controls.down;
+        } });
+    }
     data.lastUpdate = data.lastSpawnTry = data.startTime = Date.now();
     data.bufferID = window.setInterval(GameTick, parseInt(1000 / data.options.tps));
 }
@@ -370,6 +393,12 @@ const GameDrawTick = function() {
         cx().stroke();
     }
     if(data.options.debug) DrawDebugInfo();
+    if(data.options.controls == 1){
+        cx().strokeRect(70, 20, 50, 50);
+        cx().strokeRect(20, 70, 50, 50);
+        cx().strokeRect(120, 70, 50, 50);
+        cx().strokeRect(70, 120, 50, 50);
+    }
 }
 const DrawDebugInfo = function() {
     cx().font = "11px monospace";
