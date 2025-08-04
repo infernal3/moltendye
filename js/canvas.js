@@ -380,7 +380,7 @@ const DrawDebugInfo = function() {
     cx().fillText("effective_difficulty: "+(data.options.difficulty + ((data.lastUpdate - data.startTime)/360000)), 640, 170);
 }
 window.addEventListener("contextMenu",PreventDefault,{passive: false});
-cv().addEventListener("mouseup",ClickHandler,{passive: true});
+cv().addEventListener("pointerup",ClickHandler,{passive: true});
 window.addEventListener("load",LoadFunction,{passive: true});
 window.addEventListener("keyup",KeyUpHandler,{passive: true});
 window.addEventListener("keydown",KeyDownHandler,{passive: true});
